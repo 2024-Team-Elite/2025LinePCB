@@ -1,0 +1,103 @@
+
+(rules PCB LinePCB
+  (snap_angle 
+    fortyfive_degree
+  )
+  (autoroute_settings
+    (fanout off)
+    (autoroute on)
+    (postroute on)
+    (vias on)
+    (via_costs 50)
+    (plane_via_costs 5)
+    (start_ripup_costs 100)
+    (start_pass_no 165)
+    (layer_rule F.Cu
+      (active on)
+      (preferred_direction horizontal)
+      (preferred_direction_trace_costs 1.8)
+      (against_preferred_direction_trace_costs 3.3)
+    )
+    (layer_rule In1.Cu
+      (active on)
+      (preferred_direction vertical)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 1.7)
+    )
+    (layer_rule In2.Cu
+      (active on)
+      (preferred_direction horizontal)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 2.5)
+    )
+    (layer_rule B.Cu
+      (active on)
+      (preferred_direction vertical)
+      (preferred_direction_trace_costs 1.8)
+      (against_preferred_direction_trace_costs 2.5)
+    )
+  )
+  (rule
+    (width 200.0)
+    (clearance 200.0)
+    (clearance 100.0 (type smd_to_turn_gap))
+    (clearance 50.0 (type smd))
+    (clearance 200.0 (type "kicad_default"))
+  )
+  (padstack "Via[0-3]_600:300_um"
+    (shape
+      (circle F.Cu 600.0 0.0 0.0)
+    )
+    (shape
+      (circle In1.Cu 600.0 0.0 0.0)
+    )
+    (shape
+      (circle In2.Cu 600.0 0.0 0.0)
+    )
+    (shape
+      (circle B.Cu 600.0 0.0 0.0)
+    )
+    (attach off)
+  )
+  (via 
+    "Via[0-3]_600:300_um" "Via[0-3]_600:300_um" default
+  )
+  (via 
+    "Via[0-3]_600:300_um-kicad_default" "Via[0-3]_600:300_um" "kicad_default"
+  )
+  (via_rule
+    default "Via[0-3]_600:300_um"
+  )
+  (via_rule
+    "kicad_default" "Via[0-3]_600:300_um-kicad_default"
+  )
+  (class default
+    (clearance_class default)
+    (via_rule default)
+    (rule
+      (width 200.0)
+    )
+    (circuit 
+      (use_layer F.Cu In1.Cu In2.Cu B.Cu)
+    )
+  )
+  (class "kicad_default"
+    3.3V Ch1 "Net-(D2-A)" GND Ch2 "Net-(D4-A)" Ch3 "Net-(D6-A)"
+    Ch4 "Net-(D8-A)" Ch5 "Net-(D10-A)" Ch6 "Net-(D12-A)" Ch7 "Net-(D14-A)"
+    Ch8 "Net-(D16-A)" Ch9 "Net-(D18-A)" Ch10 "Net-(D20-A)" Ch11 "Net-(D22-A)"
+    Ch12 "Net-(D24-A)" Ch13 "Net-(D26-A)" Ch14 "Net-(D28-A)" Ch15 "Net-(D30-A)"
+    Ch16 "Net-(D32-A)" Ch17 "Net-(D34-A)" Ch18 "Net-(D36-A)" Ch19 "Net-(D38-A)"
+    Ch20 "Net-(D40-A)" Ch21 "Net-(D42-A)" Ch22 "Net-(D44-A)" Ch23 "Net-(D46-A)"
+    Ch24 "Net-(D48-A)" "Net-(D49-A)" 12V CS2 Kicker CS1 CS3
+    MOSI SCK1 MISO 48V "Net-(U6-D)" "Net-(U15-K)" "Net-(U6-G)" "Net-(U7-A)"
+    "Net-(U12-A)" "Net-(U14-G)" "Net-(U14-S)"
+    (clearance_class "kicad_default")
+    (via_rule "kicad_default")
+    (rule
+      (width 200.0)
+    )
+    (circuit 
+      (use_layer F.Cu In1.Cu In2.Cu B.Cu)
+    )
+  )
+)
